@@ -34,6 +34,10 @@ namespace Abp.Extensions
             if (typeof(T) == typeof(Guid))
             {
                 return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromInvariantString(obj.ToString());
+            }  
+            if (typeof(T) == typeof(Enum))
+            {
+                return (T)Enum.Parse(typeof(T), obj.ToString(), true);
             }
 
             return (T)Convert.ChangeType(obj, typeof(T), CultureInfo.InvariantCulture);
